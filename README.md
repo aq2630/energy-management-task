@@ -248,7 +248,7 @@ GET /api/alarms?search=inverter
 - **Redux Toolkit** - State management
 - **ECharts** - Data visualization
 - **Tailwind CSS** - Styling
-- **Radix UI** - Toast notifications
+- **ShaeCN & Radix UI** - UI Component
 
 ---
 
