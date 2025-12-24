@@ -48,7 +48,7 @@ The application will start on port 3000.
 
 ## 🌍 Environment Variables
 
-**This project does not require any environment variables.**
+**Since we are using Mock data so This project does not require any environment variables.**
 
 All data is generated through mock APIs that run locally within the Next.js application.
 
@@ -248,7 +248,7 @@ GET /api/alarms?search=inverter
 - **Redux Toolkit** - State management
 - **ECharts** - Data visualization
 - **Tailwind CSS** - Styling
-- **ShaeCN & Radix UI** - UI Component
+- **ShadCN & Radix UI** - UI Component
 
 ---
 
