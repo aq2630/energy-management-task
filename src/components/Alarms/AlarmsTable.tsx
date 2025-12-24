@@ -48,12 +48,12 @@ export default function AlarmsTable() {
 
   const getSeverityColor = (severity: string) => {
     const colors: Record<string, string> = {
-      'Site Down': 'bg-red-900 text-red-200',
-      'Critical': 'bg-red-700 text-white',
-      'Major': 'bg-orange-600 text-white',
-      'Minor': 'bg-yellow-600 text-white',
+      'Site Down': 'bg-red-900',
+      'Critical': 'bg-red-600',
+      'Major': 'bg-orange-500',
+      'Minor': 'bg-yellow-500',
     };
-    return colors[severity] || 'bg-gray-600 text-white';
+    return colors[severity] || 'bg-gray-500';
   };
 
   return (
@@ -70,11 +70,11 @@ export default function AlarmsTable() {
           onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
           className={`px-4 py-2 rounded-lg font-medium transition-colors ${
             showFavoritesOnly
-              ? 'bg-yellow-600 text-white'
-              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              : 'bg-yellow-600 text-white hover:bg-yellow-700'
           }`}
         >
-          {showFavoritesOnly ? '⭐ Favorites' : 'All Alarms'}
+          {showFavoritesOnly ? 'Show All Alarms' : "⭐ Show Favorites only"}
         </button>
       </div>
 
@@ -114,9 +114,9 @@ export default function AlarmsTable() {
                       </button>
                     </td>
                     <td className="py-4">
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getSeverityColor(alarm.severity)}`}>
-                        {alarm.severity}
-                      </span>
+                      <div className="flex items-center">
+                        <div className={`w-3 h-3 rounded-full ${getSeverityColor(alarm.severity)}`} title={alarm.severity}></div>
+                      </div>
                     </td>
                     <td className="py-4 text-gray-300">{alarm.siteName}</td>
                     <td className="py-4 text-gray-300 font-mono">{alarm.eventCode}</td>
