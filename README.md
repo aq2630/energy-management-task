@@ -174,70 +174,123 @@ GET /api/alarms?search=inverter
 
 ---
 
-## 📸 Application Views
+## 📸 Application Screenshots
 
-### 1. Real-Time Power Flow (Live Chart)
+### 🏠 Homepage / Dashboard
+![Homepage](./public/task-screenshots/dashboard.png)
+
+**Features:**
+- Clean navigation to all three main modules
+- Modern dark-themed interface
+- Quick access cards with hover effects
+- Direct links to Power Flow, Alarms Management, and Site Details
+
+---
+
+### ⚡ 1. Real-Time Power Flow (Live Chart)
 **Route:** `/power`
+
+![Power Flow Chart](./public/task-screenshots/real-time-power.png)
 
 **Features:**
 - Real-time Active and Reactive Power visualization using ECharts
 - Smooth line animations with sinusoidal waveforms
 - Start/Stop controls for polling
 - Rolling window of 100 data points
-- Current power values display
+- Current power values display (Active kW and Reactive kVAR)
+- Animated pulse indicator when polling is active
 
 **Key Implementation:**
 - Uses custom `usePolling` hook for interval management
 - Redux `powerSlice` manages chart data and polling state
 - 60-second automatic polling when active
+- ECharts with gradient area fills
 
 ---
 
-### 2. Alarms Management (Events Table)
+### 🚨 2. Alarms Management (Events Table)
 **Route:** `/alarms`
 
+![Alarms Table](./public/task-screenshots/alarms-management.png)
+
 **Features:**
-- Dark-themed events table
+- Dark-themed events table with complete alarm information
 - Real-time search with 400ms debounce
-- Favorites system with star icons
-- Toggle between "All Alarms" and "Favorites" view
-- Severity indicators with color coding
-- Tags display for each alarm
+- Favorites system with star/unstar functionality
+- Toggle between "All Alarms" and "Favorites Only" view
+- Severity indicators with colored circles (Site Down, Critical, Major, Minor)
+- Event codes, descriptions, and timestamps
+- Multiple tags display for each alarm
+- Hover effects and responsive design
 
 **Key Implementation:**
 - Uses custom `useDebounce` hook for search optimization
 - Redux `alarmSlice` manages alarms state and favorites
 - Server-side filtering via query parameters
+- Color-coded severity system for quick identification
 
 ---
 
-### 3. Site Details (Energy Summary)
+### 🏭 3. Site Details (Energy Summary)
 **Route:** `/site/:id` (e.g., `/site/1`)
 
+![Site Details](./public/task-screenshots/site-details.png)
+
 **Features:**
+- **Site Header** - Displays site name, location, and operating mode
 - **Alarm Summary Cards** - Visual dashboard showing alarm counts by severity
-  - Site Down
-  - Critical
-  - Major
-  - Minor
-- **Energy Report Chart** - Stacked bar chart displaying daily energy consumption
+  - Site Down (Dark Red)
+  - Critical (Red)
+  - Major (Orange)
+  - Minor (Yellow)
+- **Energy Report Chart** - Stacked bar chart displaying daily energy generation
   - Solar energy (orange bars)
   - Grid energy (blue bars)
-  - Total energy display
-- **Maintenance Ticket Drawer** - Comprehensive work order creation form
-  - WO Template selection
-  - Site and location details
-  - File upload capability
-  - Priority and category selection
-  - Planned start/end times
-  - Save as Draft or Submit options
-  - Toast notifications for success/error
+  - Total energy display in kWh
+  - 7-day historical data visualization
+- **Create Ticket Button** - Opens maintenance work order drawer
 
 **Key Implementation:**
 - Dynamic routing with site ID parameter
 - Redux `siteSlice` for site information and energy stats
+- ECharts stacked bar chart for energy visualization
+- Real-time data fetching from API
+
+---
+
+### 🔧 4. Maintenance Work Order Form
+![Maintenance Form](./public/task-screenshots/ticket-drawer.png)
+
+**Features:**
+- **Side Drawer Interface** - Smooth slide-in animation with backdrop
+- **Comprehensive Form Fields:**
+  - WO Template selection dropdown
+  - Site selection dropdown
+  - Zone & Region (two-column layout)
+  - Cluster ID & Hub Site (two-column layout)
+  - File upload with drag-and-drop interface
+  - WO Template Name input
+  - Assignee selection dropdown
+  - Subject textarea (required)
+  - Activity Performer input (required)
+  - Service Impact dropdown (required)
+  - OpCAT T1 category selection (required)
+  - OpCAT T2 sub-category selection (required)
+  - Planned Start Time (datetime picker)
+  - Planned End Time (datetime picker)
+- **Action Buttons:**
+  - Save as Draft (outlined purple button)
+  - Submit (solid purple button)
+- **Form Validation** - Required fields marked with asterisk
+- **Toast Notifications** - Success/error feedback
+
+**Key Implementation:**
 - Redux `maintenanceSlice` for ticket management
+- Full form state management with React hooks
 - Toast notifications using Radix UI
+- File upload handling
+- Two submission modes: Draft and Submit
+- Responsive drawer with smooth animations
 
 ---
 
